@@ -1,23 +1,482 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <!-- SEO friendly CSS (Soft/Colorful design) -->
+  <style>
+    /* 기본 스타일 */
+    body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; margin: 0; padding: 0; background-color: #f7f9fc; color: #333; }
+    header { background: linear-gradient(135deg, #007bff 0%, #00aaff 100%); color: #fff; text-align: center; padding: 40px 15px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2); }
+    section { max-width: 900px; margin: 30px auto; padding: 25px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    h1, h2, h3 { color: #0066cc; line-height: 1.4; }
+    h1 { font-size: 2.5em; font-weight: 700; margin-bottom: 10px; }
+    h2 { font-size: 2.2em; border-bottom: 2px solid #e0eafb; padding-bottom: 10px; margin-top: 30px; }
+    h3 { font-size: 1.6em; color: #2a7e43; margin-top: 25px; }
+    p { margin-bottom: 15px; color: #444; }
+    ul, ol { padding-left: 20px; margin-bottom: 15px; line-height: 1.8; }
+    li { margin-bottom: 8px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 20px 0; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+    th { background: #0066cc; color: #fff; font-weight: 700; border-right: 1px solid #0056b3; }
+    td { background: #fdfdfd; }
+    tr:nth-child(even) td { background: #f9f9f9; }
+    a { color: #007bff; text-decoration: none; transition: color 0.3s ease; }
+    a:hover { text-decoration: underline; color: #0056b3; }
+
+    /* CTA 버튼 (Colorful and soft) */
+    .btn-cta {
+      display: inline-block;
+      padding: 14px 30px;
+      background: linear-gradient(to right, #ff7e5f, #feb47b); /* Soft gradient */
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1em;
+      border-radius: 30px;
+      box-shadow: 0 6px 15px rgba(255, 126, 95, 0.4);
+      transition: all 0.3s ease;
+      text-align: center;
+      margin: 20px auto;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-cta:hover {
+      background: linear-gradient(to right, #feb47b, #ff7e5f);
+      box-shadow: 0 8px 20px rgba(255, 126, 95, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* 네비게이션 스타일 */
+    nav { max-width: 900px; margin: 20px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 10px; }
+    nav ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-around; }
+    nav li { margin: 5px 10px; }
+    nav a { display: block; padding: 10px 15px; background: #f0f6ff; border-radius: 20px; color: #0066cc; font-weight: 500; transition: background-color 0.3s; }
+    nav a:hover { background: #e0eafb; text-decoration: none; }
+
+    /* 폼 스타일 */
+    form { background: #f9f9f9; padding: 25px; border-radius: 10px; border: 1px solid #eee; }
+    input[type="text"], input[type="tel"], textarea, select {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus, input[type="tel"]:focus, textarea:focus, select:focus { border-color: #007bff; box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); outline: none; }
+    label { font-weight: 600; color: #555; display: block; margin-bottom: 5px; }
+
+    /* 반응형 디자인 */
+    @media(max-width: 768px) {
+      body { padding: 0; }
+      header { padding: 30px 15px; }
+      h1 { font-size: 2em; }
+      h2 { font-size: 1.8em; }
+      nav ul { flex-direction: column; }
+      nav li { margin: 5px 0; width: 100%; text-align: center; }
+      section { margin: 15px auto; padding: 20px; }
+      table, th, td { display: block; width: 100%; box-sizing: border-box; }
+      th { border-bottom: none; }
+      td { border-bottom: 1px solid #eee; }
+      tr { margin-bottom: 10px; display: block; border: 1px solid #eee; border-radius: 8px; }
+      td:before { content: attr(data-label); font-weight: bold; display: inline-block; width: 120px; margin-right: 10px; }
+    }
+    
+    /* 그래프 스타일 (Placeholder for visual enhancement) */
+    .graph-container {
+      margin: 20px 0;
+      padding: 20px;
+      background: #fdfdfd;
+      border: 1px solid #e0eafb;
+      border-radius: 8px;
+      position: relative;
+    }
+    .graph-bar {
+      height: 20px;
+      background-color: #2a7e43;
+      margin-bottom: 5px;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .graph-label { font-size: 0.9em; color: #666; width: 100px; display: inline-block; vertical-align: top; margin-top: 2px; }
+    .graph-value { font-size: 0.9em; color: #333; font-weight: bold; margin-left: 10px; display: inline-block; }
+    .graph-item { display: flex; align-items: center; margin-bottom: 10px; }
+    .graph-bar-wrapper { flex-grow: 1; margin-left: 10px; }
+    .graph-title { font-size: 1.2em; font-weight: bold; margin-bottom: 15px; color: #0066cc; }
+    
+    /* 참고정보 박스 */
+    .info-box {
+        background: #eaf6ff;
+        border-left: 5px solid #007bff;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 5px;
+        font-size: 0.95em;
+        line-height: 1.6;
+    }
+    .info-box strong { font-weight: 700; color: #0056b3; }
+
+    /* footer */
+    footer { text-align: center; padding: 20px; background: #333; color: #ccc; margin-top: 30px; border-radius: 15px 15px 0 0; }
+    footer a { color: #fff; text-decoration: underline; }
+
+  </style>
+
+  <!-- Schema.org LocalBusiness 마크업(JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MovingCompany",
+    "name": "대전 포장이사 추천 전문가이드",
+    "image": "https://도메인/로고.png",
+    "url": "https://도메인/대전포장이사",
+    "telephone": "042-123-4567",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "대전광역시 서구 둔산로 123",
+      "addressLocality": "대전광역시",
+      "addressRegion": "충남",
+      "postalCode": "35231",
+      "addressCountry": "KR"
+    },
+    "areaServed": [
+        {"@type": "City", "name": "대전광역시"},
+        {"@type": "City", "name": "세종특별자치시"}
+    ],
+    "priceRange": "₩₩₩",
+    "description": "대전 포장이사 전문 서비스. 2026년 최신 정보 기반 서구, 유성구, 중구, 동구, 대덕구 지역 이사 업체 추천 및 비용 안내."
+  }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>대전 포장이사 추천 내돈내산 후기</h1>
+    <p>서구, 유성구, 동구, 중구, 대덕구 전 지역 이사 비용 비교 및 맞춤형 업체 추천</p>
+    <button class="btn-cta" onclick="location.href='#contact'">지금 바로 무료 방문 견적 신청하기</button>
+  </header>
+
+  <nav aria-label="페이지 내 이동">
+    <ul>
+      <li><a href="#intro">가이드 소개</a></li>
+      <li><a href="#service-area">주요 서비스 지역</a></li>
+      <li><a href="#cost">비용 산정 가이드</a></li>
+      <li><a href="#service-types">이사 서비스 유형</a></li>
+      <li><a href="#company-recommend">업체 선정 기준</a></li>
+      <li><a href="#checklist">이사 체크리스트</a></li>
+      <li><a href="#contact">견적 상담 문의</a></li>
+    </ul>
+  </nav>
+
+  <section id="intro">
+    <h2>대전 포장이사 추천 가이드: 2026년 최신 트렌드 반영</h2>
+    <p>이사(移徙)는 인생의 중요한 전환점입니다. 특히 대전광역시는 행정 중심 복합도시인 세종특별자치시와 인접해 있어 인구 유입 및 이동이 활발한 지역입니다. 대전 서구 둔산동, 유성구 도안신도시, 대덕구 법동 등 각 지역별 특성에 맞는 전문적인 포장이사 서비스를 선택하는 것이 중요합니다. 이 가이드는 2026년 기준 대전 지역 포장이사 시장 동향과 함께, 합리적인 비용으로 만족스러운 서비스를 받을 수 있는 방법을 제시합니다.</p>
+    <p><strong>주요 키워드:</strong> 대전 포장이사 추천, 대전 이삿짐센터, 대전 용달이사, 대전 반포장이사, 대전 이사 비용, 대전 아파트 이사, 서구 이사, 유성구 이사, 둔산동 이사, 노은동 이사.</p>
+    <div class="info-box">
+        <strong>포장이사의 중요성:</strong> 이사 과정에서 짐의 파손이나 분실은 큰 스트레스로 이어질 수 있습니다. 특히 짐이 많은 아파트나 빌라 이사의 경우, 전문 포장 기술과 사후 보상 시스템을 갖춘 업체를 선택하는 것이 무엇보다 중요합니다. 본 가이드는 대전 지역의 신뢰도 높은 업체 선정 기준과 함께, 2026년 이사 준비에 필요한 필수 정보를 총망라합니다.
+    </div>
+  </section>
+
+  <section id="service-area">
+    <h2>대전 주요 지역별 이사 서비스 안내</h2>
+    <p>대전은 5개의 구(서구, 유성구, 중구, 동구, 대덕구)로 이루어져 있으며, 각 구마다 주거 형태와 이사 수요에 차이가 있습니다. 대전 지역 이사는 특히 유성구와 서구의 대규모 아파트 단지 밀집 지역과 원도심인 동구, 중구의 빌라 및 주택 밀집 지역에 따라 전략이 달라집니다.</p>
+
+    <h3>1. 대전 서구 (둔산동, 관저동, 탄방동) 이사</h3>
+    <p>서구는 대전의 중심지로, 둔산동, 탄방동을 중심으로 대형 아파트 단지와 오피스텔이 밀집되어 있습니다. 둔산동은 대전의 주요 행정 및 상업 지구로, 엘리베이터 협조와 주차 공간 확보가 중요한 지역입니다. 관저동이나 도안신도시는 신축 아파트가 많아 이사 수요가 꾸준하며, 꼼꼼한 가구 포장과 신속한 이사 서비스가 요구됩니다.</p>
+    <p><strong>키워드:</strong> 대전 서구 포장이사, 둔산동 이삿짐센터, 관저동 이사 비용, 탄방동 아파트 이사.</p>
+
+    <h3>2. 대전 유성구 (도안동, 노은동, 전민동) 이사</h3>
+    <p>유성구는 대전에서 인구 증가율이 가장 높은 지역으로, 대규모 택지 개발 지구인 도안신도시와 노은지구가 있습니다. 이곳은 젊은 세대의 유입이 많아 원룸, 투룸 포장이사 수요와 함께 아파트 이사 수요도 높습니다. KAIST와 정부청사가 위치한 만큼 고급 이사 서비스에 대한 요구도 많습니다. 특히 대전 유성구는 세종시와 가까워 세종-대전 간 이사도 활발합니다.</p>
+    <p><strong>키워드:</strong> 대전 유성구 포장이사, 노은동 이삿짐센터, 도안동 이사, 세종 대전 이사.</p>
+
+    <h3>3. 대전 중구, 동구 (원도심 및 주택가) 이사</h3>
+    <p>중구(대흥동, 문화동)와 동구(가양동, 용운동)는 대전의 원도심 지역으로, 주택, 빌라, 오래된 아파트 단지가 많습니다. 이곳은 좁은 골목길과 계단이 많은 주거 형태가 흔하므로 사다리차 이용이 필수적이거나, 짐 운반 시 숙련된 인력이 필요한 경우가 많습니다. 중구 포장이사는 특히 반포장이사 수요가 높으며, 동구 포장이사는 구도심의 특성상 짐 보관이사 수요도 있습니다.</p>
+    <p><strong>키워드:</strong> 대전 중구 이사, 동구 포장이사, 대전 용달이사, 대전 반포장이사.</p>
+  </section>
+
+  <section id="cost">
+    <h2>2026년 대전 포장이사 비용 산정 가이드 및 절감 팁</h2>
+    <p>대전 포장이사 비용은 여러 요인에 의해 결정됩니다. 단순히 저렴한 가격만 쫓기보다는, 서비스의 질과 보상 여부를 꼼꼼히 확인해야 합니다. 2026년 기준 대전 지역의 평균적인 포장이사 비용과 비용 절감 팁을 안내합니다.</p>
+
+    <h3>비용 결정 주요 요인 분석</h3>
+    <ol>
+      <li><strong>이사 물량 (짐의 양):</strong> 짐이 많을수록 인력과 차량 크기, 포장재 사용량이 늘어나 비용이 증가합니다.</li>
+      <li><strong>이동 거리:</strong> 대전 내 이동(단거리)과 대전 외 타 지역(장거리) 이동에 따라 비용이 달라집니다. 대전-세종, 대전-청주 간 이사 수요가 많습니다.</li>
+      <li><strong>작업 환경:</strong> 사다리차 이용 여부, 엘리베이터 이용 여부, 계단 작업 유무 등이 비용에 영향을 미칩니다.</li>
+      <li><strong>추가 옵션:</strong> 에어컨 탈부착, 벽걸이 TV 설치, 돌침대 해체/재설치, 청소 서비스 등 추가 옵션에 따라 비용이 추가됩니다.</li>
+      <li><strong>이삿날 (손 없는 날):</strong> 전통적으로 '손 없는 날'은 이사 수요가 몰려 비용이 20~30% 할증됩니다. 2026년에도 이사 수요가 가장 많은 날짜입니다.</li>
+    </ol>
+
+    <h3>대전 포장이사 예상 비용표 (2026년 기준)</h3>
+    <div class="info-box">
+        <strong>주의:</strong> 아래 표는 대전 지역 이사 평균 비용이며, 실제 견적은 업체별, 상황별로 크게 달라질 수 있습니다. 방문 견적을 통해 정확한 비용을 확인해야 합니다. 특히 유성구 도안신도시나 서구 둔산동 신축 아파트의 경우 엘리베이터 사용료 등이 추가될 수 있습니다.
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>이사 유형</th>
+          <th>평균 소요 인력</th>
+          <th>비수기 예상 비용</th>
+          <th>성수기/손없는날 예상 비용</th>
+          <th>주요 서비스 지역 (대전)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>원룸 이사 (5톤 미만)</td>
+          <td>남 1명</td>
+          <td>25만 원 ~ 45만 원</td>
+          <td>30만 원 ~ 60만 원</td>
+          <td>유성구 궁동, 서구 괴정동, 중구 대흥동</td>
+        </tr>
+        <tr>
+          <td>투룸/빌라 이사 (5톤)</td>
+          <td>남 2명 + 여 1명</td>
+          <td>50만 원 ~ 80만 원</td>
+          <td>65만 원 ~ 100만 원</td>
+          <td>서구 탄방동, 유성구 봉명동</td>
+        </tr>
+        <tr>
+          <td>아파트 이사 (24평 기준)</td>
+          <td>남 3명 + 여 1명</td>
+          <td>80만 원 ~ 120만 원</td>
+          <td>110만 원 ~ 160만 원</td>
+          <td>서구 둔산동, 유성구 노은동</td>
+        </tr>
+        <tr>
+          <td>대형 아파트 이사 (34평 이상)</td>
+          <td>남 4명 + 여 1명</td>
+          <td>120만 원 ~ 180만 원</td>
+          <td>150만 원 ~ 250만 원</td>
+          <td>유성구 도안동, 서구 관저동, 대덕구 법동</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>비용 절감을 위한 팁 (2026년)</h3>
+    <ul>
+      <li><strong>이사철 피하기:</strong> 3~5월, 9~10월의 성수기를 피하고 1~2월, 7~8월의 비수기를 이용하면 10% 이상 절감 가능합니다.</li>
+      <li><strong>방문 견적 필수:</strong> 전화 견적만으로는 정확한 비용 산출이 어렵습니다. 최소 2~3곳의 대전 포장이사 업체에 방문 견적을 받아 비교하세요.</li>
+      <li><strong>불필요한 짐 정리:</strong> 이사 전 짐을 미리 정리하여 물량을 줄이면 비용이 줄어듭니다. 중고 물품 판매나 기부를 고려하세요.</li>
+      <li><strong>요일 선택:</strong> 주말 이사보다는 평일 이사가 상대적으로 저렴합니다.</li>
+    </ul>
+  </section>
+
+  <section id="service-types">
+    <h2>대전 포장이사, 반포장이사, 보관이사 서비스 비교</h2>
+    <p>포장이사 외에도 다양한 서비스가 있습니다. 자신의 상황과 예산에 맞는 이사 유형을 선택하는 것이 중요합니다. 특히 대전 지역에서는 1인 가구 증가로 인해 '반포장이사' 수요가 증가하고 있습니다.</p>
+
+    <h3>1. 포장이사 (Full Packing Service)</h3>
+    <p>업체에서 포장, 운반, 정리 정돈까지 모든 과정을 책임집니다. 고객은 귀중품만 챙기면 됩니다. 가장 편리한 이사 방법이지만 비용이 가장 높습니다. 서구 둔산동, 유성구 도안동 등 대규모 아파트 단지 이사에 적합합니다.</p>
+
+    <h3>2. 반포장이사 (Half Packing Service)</h3>
+    <p>업체에서 짐 포장 및 운반을 하고, 도착 후 짐 정리(잔짐 풀기)는 고객이 직접 합니다. 포장이사보다 비용이 저렴하며, 짐이 적거나 정리 정돈에 대한 선호가 있는 분들에게 인기가 많습니다. 대전 원룸, 투룸 이사에 적합합니다.</p>
+
+    <h3>3. 보관이사 (Storage Moving Service)</h3>
+    <p>이사 날짜가 맞지 않아 짐을 일정 기간 보관해야 할 때 사용됩니다. 업체에서 포장 후 보관소에 보관하며, 원하는 날짜에 재운송 및 정리합니다. 대전 신축 아파트 입주 시기 문제나 인테리어 공사 등으로 인해 발생하는 수요가 많습니다.</p>
+  </section>
+
+  <section id="company-recommend">
+    <h2>신뢰할 수 있는 대전 포장이사 업체 선정 기준 및 추천 TOP 5</h2>
+    <p>수많은 대전 이사업체 중에서 신뢰할 수 있는 곳을 고르는 것은 매우 중요합니다. 다음은 2026년 이사 준비 시 반드시 고려해야 할 업체 선정 기준입니다.</p>
+
+    <h3>업체 선정 필수 체크리스트</h3>
+    <div class="info-box">
+        <strong>불법 업체 주의:</strong> 허가받지 않은 무허가 이사업체는 피해야 합니다. <a href="https://www.move.go.kr/home/index.do" target="_blank">이사화물운송주선사업자협회</a> (국토교통부)에서 정식 허가 여부를 확인할 수 있습니다. 대전 지역 정식 허가 업체 확인은 필수입니다.
+    </div>
+    <ol>
+      <li><strong>정식 허가 업체 여부:</strong> 화물자동차 운송 주선 사업 허가증을 보유하고 있는지 확인합니다.</li>
+      <li><strong>피해보상 이행보증보험 가입:</strong> 이사 중 짐 파손 시 보상을 받을 수 있도록 보험 가입 여부를 확인합니다.</li>
+      <li><strong>전문성 및 경험:</strong> 이사하려는 지역(예: 대전 서구 둔산동)의 이사 경험이 많은지, 아파트/빌라/원룸 등 주거 형태별 전문 인력을 보유하고 있는지 확인합니다.</li>
+      <li><strong>투명한 견적:</strong> 방문 견적 시 추가 요금 항목을 명확히 설명하는지 확인합니다.</li>
+      <li><strong>후기 및 평판:</strong> 온라인 후기, 네이버 플레이스 리뷰, 블로그 리뷰 등을 통해 업체의 평판을 확인합니다.</li>
+    </ol>
+
+    <h3>대전 포장이사 추천 업체 TOP 5 (2026년)</h3>
+    <p>다음은 대전 지역에서 평판이 좋고 서비스 품질이 검증된 가상의 추천 업체 목록입니다. 업체별 특징을 비교하여 자신에게 맞는 곳을 선택하세요.</p>
+    <ol>
+      <li>
+        <strong>대전 명가익스프레스 (서구/유성구 특화)</strong><br />
+        - 특징: 둔산동, 관저동 등 서구 지역 아파트 이사 전문. 특수 포장재(친환경 포장재) 사용 및 파손 보험 가입. 특히 대형 가구 및 가전 포장 노하우 보유.
+      </li>
+      <li>
+        <strong>유성 꼼꼼이사 (도안신도시 전문)</strong><br />
+        - 특징: 유성구 도안신도시, 노은지구 등 신축 아파트 입주 이사 전문. 이사 후 스팀 청소 서비스 제공 및 짐 정리 서비스 만족도 높음.
+      </li>
+      <li>
+        <strong>한밭 이사플러스 (원도심/소형 이사)</strong><br />
+        - 특징: 중구, 동구 지역 빌라, 주택 이사 특화. 좁은 골목길 운반 노하우 및 반포장이사 서비스 제공. 원룸 이사 비용 합리적.
+      </li>
+      <li>
+        <strong>대덕구 스피드 용달이사 (용달/반포장 전문)</strong><br />
+        - 특징: 대덕구 지역을 중심으로 용달 이사 및 반포장이사 전문. 1인 가구, 학생 이사에 적합하며 신속한 서비스가 장점.
+      </li>
+      <li>
+        <strong>청춘 이삿짐센터 (세종-대전 연계)</strong><br />
+        - 특징: 대전 유성구와 세종시 간 연계 이사에 강점. 장거리 이사 시 운송비 절감 노하우 보유. 사무실 이사 전문팀 운영.
+      </li>
+    </ol>
+
+    <div class="info-box">
+        <strong>추가 정보:</strong> <a href="https://namu.wiki/w/대전광역시" target="_blank">나무위키 대전광역시 항목</a>에서 각 구별 특성을 미리 파악하면 이사 계획을 세우는 데 도움이 됩니다. 예를 들어 서구 둔산동은 주거와 상업이 공존하고, 유성구는 과학도시 특성을 갖습니다.
+    </div>
+
+  </section>
+
+  <section id="checklist">
+    <h2>2026년 대전 이사 전 필수 체크리스트 (손 없는 날 대비)</h2>
+    <p>성공적인 이사를 위해서는 사전 준비가 필수입니다. 다음 체크리스트를 활용하여 대전 이사 준비를 철저히 하세요.</p>
+
+    <h3>이사 1~2주 전</h3>
+    <ul>
+      <li><strong>이사 업체 선정 완료:</strong> 방문 견적을 통해 계약서 작성 및 피해보상 보험 가입 여부 확인.</li>
+      <li><strong>이사 날짜 확정:</strong> 손 없는 날 또는 주말 이사 시, 최소 3주 전에 예약 필수.</li>
+      <li><strong>공과금 정산:</strong> 전기, 가스, 수도요금 정산 및 도시가스 차단/연결 예약 (대전도시가스 고객센터 문의).</li>
+      <li><strong>폐기물 처리:</strong> 대전시 폐기물 스티커 구매 후 대형 폐기물 처리 예약.</li>
+      <li><strong>전입 신고:</strong> 이사 전 짐 정리 및 주소지 변경.</li>
+      <li><strong>전화, 인터넷 이전:</strong> 통신사 고객센터에 연락하여 이전 설치 예약.</li>
+    </ul>
+
+    <h3>이사 당일</h3>
+    <ul>
+      <li><strong>귀중품 관리:</strong> 현금, 통장, 인감 등 귀중품은 직접 운반합니다.</li>
+      <li><strong>현장 확인:</strong> 포장 상태, 짐 목록, 파손 여부를 업체와 함께 확인합니다.</li>
+      <li><strong>이사 후 청소:</strong> 새집으로 짐을 옮기기 전 청소 여부를 확인합니다.</li>
+    </ul>
+
+    <h3>이사 후 1주일 이내</h3>
+    <ul>
+      <li><strong>전입 신고 및 확정일자:</strong> 관할 주민센터 방문하여 전입 신고 및 전월세 계약서 확정일자 받기.</li>
+      <li><strong>우편물 주소 변경:</strong> 우체국 우편물 주소 이전 서비스 신청.</li>
+      <li><strong>자동차 등록증 변경:</strong> 자동차 등록 사업소 방문하여 주소지 변경.</li>
+    </ul>
+
+    <div class="graph-container">
+        <div class="graph-title">대전 포장이사 수요 월별 분포 (2026년 예상)</div>
+        <div class="graph-item">
+            <span class="graph-label">1월 (비수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 40%;"></div></div>
+            <span class="graph-value">40%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">2월 (비수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 50%;"></div></div>
+            <span class="graph-value">50%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">3월 (성수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 95%;"></div></div>
+            <span class="graph-value">95%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">4월 (성수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 85%;"></div></div>
+            <span class="graph-value">85%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">5월 (성수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 90%;"></div></div>
+            <span class="graph-value">90%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">6월 (준성수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 70%;"></div></div>
+            <span class="graph-value">70%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">7월 (비수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 35%;"></div></div>
+            <span class="graph-value">35%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">8월 (비수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 45%;"></div></div>
+            <span class="graph-value">45%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">9월 (성수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 80%;"></div></div>
+            <span class="graph-value">80%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">10월 (성수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 90%;"></div></div>
+            <span class="graph-value">90%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">11월 (준성수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 60%;"></div></div>
+            <span class="graph-value">60%</span>
+        </div>
+        <div class="graph-item">
+            <span class="graph-label">12월 (비수기)</span>
+            <div class="graph-bar-wrapper"><div class="graph-bar" style="width: 40%;"></div></div>
+            <span class="graph-value">40%</span>
+        </div>
+        <p style="text-align: right; margin-top: 10px; font-size: 0.8em;">* 수요가 높은 3월, 5월, 10월은 이사 비용이 상승하는 경향이 있습니다.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>대전 포장이사 실시간 견적 상담 문의</h2>
+    <p>대전 지역 포장이사 전문 업체의 무료 방문 견적을 지금 바로 신청하세요. 견적을 받으면 정확한 비용과 함께 서비스 내용을 꼼꼼하게 비교할 수 있습니다.</p>
+    <form action="/submit" method="POST">
+      <label for="name">이름<span style="color:red;">*</span></label>
+      <input type="text" id="name" name="name" required placeholder="예: 홍길동" />
+
+      <label for="phone">연락처<span style="color:red;">*</span></label>
+      <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" pattern="[0-9\-]+" />
+
+      <label for="current-address">현재 거주지 주소<span style="color:red;">*</span></label>
+      <input type="text" id="current-address" name="current_address" required placeholder="예: 대전 서구 둔산동 123-45 아파트" />
+
+      <label for="new-address">새로운 거주지 주소</label>
+      <input type="text" id="new-address" name="new_address" placeholder="예: 대전 유성구 도안동 678-90 빌라" />
+
+      <label for="move-date">희망 이사 날짜<span style="color:red;">*</span></label>
+      <input type="date" id="move-date" name="move_date" required min="2026-01-01" max="2026-12-31" />
+
+      <label for="move-type">이사 유형<span style="color:red;">*</span></label>
+      <select id="move-type" name="move_type" required>
+        <option value="">선택하세요</option>
+        <option value="원룸">원룸 포장이사</option>
+        <option value="투룸">투룸 포장이사</option>
+        <option value="빌라">빌라 포장이사</option>
+        <option value="아파트">아파트 포장이사</option>
+        <option value="오피스텔">오피스텔 이사</option>
+        <option value="사무실">사무실 이사</option>
+        <option value="반포장">반포장이사</option>
+        <option value="보관이사">보관이사</option>
+      </select>
+
+      <label for="item-details">짐의 양 (주요 가구 및 가전)</label>
+      <textarea id="item-details" name="item_details" rows="3" placeholder="예: 냉장고 1개, 세탁기 1개, 침대 2개, 에어컨 설치 요청 등 상세 기재"></textarea>
+
+      <label for="options">추가 요청 사항</label>
+      <textarea id="options" name="options" rows="3" placeholder="예: 사다리차 이용 필요, 층수, 짐 보관 기간 등 특이사항 기재"></textarea>
+
+      <button type="submit" class="btn-cta">무료 견적 상담 신청하기</button>
+    </form>
+  </section>
+
+  <section id="faq">
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    <h3>Q1: 대전 포장이사 업체 선정 시 가장 중요한 것은 무엇인가요?</h3>
+    <p>A: 가장 중요한 것은 <strong>정식 허가 여부와 피해보상 이행보증보험 가입 여부</strong>입니다. 견적서에 해당 내용이 명시되어 있는지 반드시 확인해야 합니다. 무허가 업체는 문제가 발생했을 때 보상을 받기 어렵습니다. 또한, <a href="http://www.koreatransport.or.kr/" target="_blank">이사화물운송주선사업자협회</a>에서 허가 여부를 조회하여 신뢰성을 확보해야 합니다. 대전 지역에는 많은 업체가 있으므로 꼼꼼한 비교가 필요합니다.</p>
+
+    <h3>Q2: 대전 포장이사 비용을 절약할 수 있는 방법이 있나요?</h3>
+    <p>A: 네, 있습니다. 첫째, <strong>비수기 이사</strong>를 선택하세요. 대전 이사 수요가 많은 3~5월, 9~10월을 피하면 비용을 절감할 수 있습니다. 둘째, <strong>방문 견적을 여러 곳에서 받아 비교</strong>하세요. 업체별 견적이 다를 수 있으므로 2~3곳 비교는 필수입니다. 셋째, <strong>불필요한 짐은 미리 정리</strong>하여 이사 물량을 줄이는 것도 비용 절감에 도움이 됩니다. 대전 중구와 동구 지역은 좁은 골목길로 인해 사다리차 대신 인력 추가 비용이 발생할 수 있으므로 견적 시 확인하세요.</p>
+
+    <h3>Q3: 포장이사와 반포장이사의 차이점은 무엇인가요?</h3>
+    <p>A: 포장이사는 짐 포장부터 운반, 정리 정돈까지 모든 과정을 업체가 진행합니다. 고객은 귀중품만 챙기면 됩니다. 반면 반포장이사는 짐 포장과 운반을 업체가 하고, 도착 후 짐 정리(잔짐 풀기)는 고객이 직접 합니다. 대전 원룸, 투룸 이사 등 짐이 비교적 적은 경우 반포장이사를 선택하여 비용을 절감하는 경우가 많습니다.</p>
+
+    <h3>Q4: 이사 중 가구 파손이 발생하면 어떻게 해야 하나요?</h3>
+    <p>A: 이사 중 파손이 발생하면 즉시 현장에서 업체에 알리고 사진이나 영상으로 기록을 남겨야 합니다. 계약서에 명시된 피해보상규정에 따라 보상을 요구할 수 있습니다. 정식 허가 업체는 의무적으로 보증보험에 가입되어 있어 보상이 수월합니다. <a href="https://www.consumer.go.kr/main/index.do" target="_blank">한국소비자원</a>에 분쟁 조정을 신청할 수도 있습니다.</p>
+  </section>
+
+  <footer>
+    <p><strong>대전 포장이사 추천 전문가이드</strong> | 2026년 최신 정보 기반</p>
+    <p>사업자 등록번호: 123‑45‑67890 | 주소: 대전광역시 서구 둔산로 123</p>
+    <p>연락처: <a href="tel:0421234567">042-123-4567</a> | 이메일: <a href="mailto:help@domain.com">help@domain.com</a></p>
+    <p>이용약관 | 개인정보처리방침</p>
+  </footer>
+
+  
